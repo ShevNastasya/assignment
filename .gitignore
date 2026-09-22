@@ -1,0 +1,60 @@
+# Dependencies
+node_modules/
+app/node_modules/
+package-lock.json
+yarn.lock
+
+# Build outputs
+app/dist/
+app/build/
+*.tsbuildinfo
+
+# Playwright test artifacts
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+.playwright/
+
+# Runtime/database
+api/db.json
+*.sqlite
+*.db
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+.vs/
+.vscode-test/
+*.code-workspace
+
+# OS
+Thumbs.db
+*.pdb
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Misc
+dist/
+build/
+coverage/
+.nyc_output/
+
+# Answer key — must not be shared with candidates who fork the public repo
+INTERVIEWER_GUIDE.md
