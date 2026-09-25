@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-
-const API_URL = 'http://localhost:3001';
+import { faker } from '@faker-js/faker';
+import { API_URL } from '../api/api-config';
 
 test.describe('Tasks API', () => {
   test('GET /tasks returns the list of seeded tasks', async ({ request }) => {
@@ -19,4 +19,27 @@ test.describe('Tasks API', () => {
   //   - the response status code
   //   - the shape/structure of the response payload
   //   - that key attributes (title, description, status) match what was submitted
+  test.describe('Task Creation API', () => {
+    const alphaNumeric = faker.string.alphanumeric(8);
+    const taskName = `Task name ${alphaNumeric}`;
+    test('POST /creates a new task', async ({ request }) => {
+      const newTaskResponse = await request.post(`${API_URL}/tasks`, {
+        data: {
+          "title": taskName,
+          "description": "This is description of the task",
+          "status": "Open",
+          "createdAt": "2026-09-24T03:11:54.131Z"
+        }
+      })
+      expect(newTaskResponse.status()).toEqual(201)
+      const responseTaskJSON = await newTaskResponse.json()
+      expect(responseTaskJSON).toHaveProperty('title')
+      expect(responseTaskJSON).toHaveProperty('description')
+      expect(responseTaskJSON).toHaveProperty('status')
+      expect(responseTaskJSON).toHaveProperty('id')
+      expect(responseTaskJSON.title).toBe(taskName)
+      expect(responseTaskJSON.description).toBe('This is description of the task')
+      expect(responseTaskJSON.status).toBe('Open')
+    })
+  });
 });
