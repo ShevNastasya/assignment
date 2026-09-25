@@ -88,4 +88,8 @@ export class TaskManagerPage {
   async search(term: string) {
     await this.page.getByTestId('search-input').fill(term);
   }
+
+  emptyState() {
+    return this.page.getByTestId('empty-state');
+  }
 }
